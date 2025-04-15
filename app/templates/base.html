@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- css -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+        <link href="{%static 'app/css/style.css'%}" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js" integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+" crossorigin="anonymous"></script>
+        <title>Shop anh Tùng</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--header-->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">
+                <img src=" {% static 'app/images/logo.png' %}" width="70" height="60" />
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                  </li>
+                  
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sản phẩm
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Quần áo nam</a></li>
+                      <li><a class="dropdown-item" href="#">Quần áo nữ</a></li>
+                      <li><a class="dropdown-item" href="#">Quần áo Unisex</a></li>
+                      <li><a class="dropdown-item" href="#">Mỹ phẩm</a></li>
+                      <li><a class="dropdown-item" href="#">Đồ trẻ sơ sinh</a></li>
+                      <li><a class="dropdown-item" href="#">Giày dép nam</a></li>
+                      <li><a class="dropdown-item" href="#">Giày dép nữ</a></li>
+                      <li><a class="dropdown-item" href="#">Thiết bị điện tử</a></li>
+                      <li><a class="dropdown-item" href="#">Thời trang trẻ em</a></li>
+                      <li><a class="dropdown-item" href="#">Nồi chảo</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Giới thiệu</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Hướng dẫn mua hàng</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Liên hệ</a>
+                  </li>
+                </ul>
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Hồ sơ
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Tài khoản của tôi</a></li>
+                    <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
+                    <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Giỏ hàng</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Đăng nhập</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Đăng ký</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        <!--main-->
+        {% block main-content %} {% endblock main-content %}
+        <!--footer-->
+        <footer class= "container--fluid bg-success text-center fixed-bottom p-2 mt-5">
+            Copyright 2025
+        </footer>
+    </body>
+</html>
+ 
