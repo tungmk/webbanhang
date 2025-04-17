@@ -1,5 +1,132 @@
-{% {% extends "base.html" %}%}
+{% extends 'base.html' %}
 {% load static %}
+{% block banner_slider %}
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="5" aria-label="Slide 6"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="6" aria-label="Slide 7"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="7" aria-label="Slide 8"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="4000">
+      <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100" alt="..." height= '400'> 
+      <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+        <p></p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="4000">
+      <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="..." height= '400'>
+      <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+        <p></p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="4000">
+      <img src="{% static 'app/images/banner/b3.jpg' %}" class="d-block w-100" alt="..." height= '400'>
+      <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+        <p></p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="4000">
+      <img src="{% static 'app/images/banner/b4.jpg' %}" class="d-block w-100" alt="..." height= '400'>
+      <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+        <p></p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="4000">
+      <img src="{% static 'app/images/banner/b5.jpg' %}" class="d-block w-100" alt="..." height= '400'>
+      <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+        <p></p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="4000">
+      <img src="{% static 'app/images/banner/b6.jpg' %}" class="d-block w-100" alt="..." height= '400'>
+      <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+        <p></p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="4000">
+      <img src="{% static 'app/images/banner/b7.jpg' %}" class="d-block w-100" alt="..." height= '400'>
+      <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+        <p></p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="4000">
+      <img src="{% static 'app/images/banner/b8.jpg' %}" class="d-block w-100" alt="..." height= '400'>
+      <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock banner_slider %}
 {% block main-content %}
-Welcome to Shop anh Tung
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 mb-4">
+      <img class="thumbnail img-fluid" src="{% static "app/images/aothunnu.jpg" %}" >
+      <div class="box-element product text-center">
+        <h6><strong>Áo thun nữ</strong></h6>
+        <hr>
+        <button class="btn btn-outline-secondary add-btn"> Thêm vào giỏ hàng </button>
+        <a class="btn btn-outline-success" href="#">Xem</a>
+        <h4 class="float-end"><strong>36.000</strong></h4>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mb-4">
+      <img class="thumbnail img-fluid" src="{% static "app/images/adidassuc.jpg" %}" >
+      <div class="box-element product text-center">
+        <h6><strong>Dép sục Adifom</strong></h6>
+        <hr>
+        <button class="btn btn-outline-secondary add-btn"> Thêm vào giỏ hàng </button>
+        <a class="btn btn-outline-success" href="#">Xem</a>
+        <h4 class="float-end"><strong>63.000</strong></h4>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mb-4">
+      <img class="thumbnail img-fluid" src="{% static "app/images/aothununisex.jpg" %}" >
+      <div class="box-element product text-center">
+        <h6><strong>Áo thun Unisex</strong></h6>
+        <hr>
+        <button class="btn btn-outline-secondary add-btn"> Thêm vào giỏ hàng </button>
+        <a class="btn btn-outline-success" href="#">Xem</a>
+        <h4 class="float-end"><strong>36.000</strong></h4>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mb-4">
+      <img class="thumbnail img-fluid" src="{% static "app/images/depbanhmi.jpg" %}" >
+      <div class="box-element product text-center">
+        <h6><strong>Dép bánh mì</strong></h6>
+        <hr>
+        <button class="btn btn-outline-secondary add-btn"> Thêm vào giỏ hàng </button>
+        <a class="btn btn-outline-success" href="#">Xem</a>
+        <h4 class="float-end"><strong>36.000</strong></h4>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
 {% endblock main-content %}
