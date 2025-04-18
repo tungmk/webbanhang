@@ -21,3 +21,7 @@ def contact(request):
 def introduce(request):
     context= {}
     return render(request, 'introduce.html')
+
+def shopping_guide(request):
+    context={}
+    return render(request, 'shopping_guide.html')
