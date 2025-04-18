@@ -13,3 +13,11 @@ def cart(request):
 def checkout(request):
     context= {}
     return render(request, 'checkout.html')
+
+def contact(request):
+    context= {}
+    return render(request, 'contact.html')
+
+def introduce(request):
+    context= {}
+    return render(request, 'introduce.html')
