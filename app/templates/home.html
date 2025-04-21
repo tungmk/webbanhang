@@ -82,51 +82,19 @@
 {% endblock banner_slider %}
 {% block main-content %}
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-lg-4 col-md-6 mb-4">
-      <img class="thumbnail img-fluid" src="{% static "app/images/aothunnu.jpg" %}" >
+  <div class="row" | style="width:100%">
+  {%for product in products %}
+    <div class="col-lg-3 col-md-6 mb-4">
+      <img class="thumbnail img-fluid" src="{% static "app/images/placeholder.png" %}" >
       <div class="box-element product text-center">
-        <h6><strong>Áo thun nữ</strong></h6>
+        <h6><strong>{{product.name}}</strong></h6>
         <hr>
-        <button class="btn btn-outline-secondary add-btn"> Thêm vào giỏ hàng </button>
-        <a class="btn btn-outline-success" href="#">Xem</a>
-        <h4 class="float-end"><strong>36.000</strong></h4>
+        <button class="btn btn-outline-secondary add-btn"> Add to cart </button>
+        <a class="btn btn-outline-success" href="#">View</a>
+        <h4 class="float-end"><strong>{{product.price | floatformat:0}} VNĐ</strong></h4>
       </div>
     </div>
-
-    <div class="col-lg-4 col-md-6 mb-4">
-      <img class="thumbnail img-fluid" src="{% static "app/images/adidassuc.jpg" %}" >
-      <div class="box-element product text-center">
-        <h6><strong>Dép sục Adifom</strong></h6>
-        <hr>
-        <button class="btn btn-outline-secondary add-btn"> Thêm vào giỏ hàng </button>
-        <a class="btn btn-outline-success" href="#">Xem</a>
-        <h4 class="float-end"><strong>63.000</strong></h4>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-6 mb-4">
-      <img class="thumbnail img-fluid" src="{% static "app/images/aothununisex.jpg" %}" >
-      <div class="box-element product text-center">
-        <h6><strong>Áo thun Unisex</strong></h6>
-        <hr>
-        <button class="btn btn-outline-secondary add-btn"> Thêm vào giỏ hàng </button>
-        <a class="btn btn-outline-success" href="#">Xem</a>
-        <h4 class="float-end"><strong>36.000</strong></h4>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-6 mb-4">
-      <img class="thumbnail img-fluid" src="{% static "app/images/depbanhmi.jpg" %}" >
-      <div class="box-element product text-center">
-        <h6><strong>Dép bánh mì</strong></h6>
-        <hr>
-        <button class="btn btn-outline-secondary add-btn"> Thêm vào giỏ hàng </button>
-        <a class="btn btn-outline-success" href="#">Xem</a>
-        <h4 class="float-end"><strong>36.000</strong></h4>
-      </div>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 <br><br>
 {% endblock main-content %}
