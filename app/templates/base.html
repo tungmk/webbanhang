@@ -31,7 +31,7 @@
         }
         const csrftoken = getCookie('csrftoken');
         </script>
-        
+
         <title>Shop anh Tùng Núi</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -98,9 +98,7 @@
                     <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
                   </ul>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href={% url 'cart' %}>Giỏ hàng</a>
-                </li>
+                
                 <li class="nav-item">
                   <a class="nav-link" href="#">Đăng nhập</a>
                 </li>
@@ -108,6 +106,11 @@
                   <a class="nav-link" href="#">Đăng ký</a>
                 </li>
               </ul>
+              <div class='form-inline my-2 ly-lh-0'>
+                <a href="{% url 'cart' %}"><img id="cart-icon" src="{% static 'images/cart.png' %}"></a>
+                <p id = 'cart-total' >{{cartItems}}</p>
+                <p >0</p>
+              </div>
             </div>
           </nav>
         <!--main-->
