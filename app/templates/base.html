@@ -58,72 +58,70 @@
                       Sản phẩm
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Quần áo nam</a></li>
-                      <li><a class="dropdown-item" href="#">Quần áo nữ</a></li>
-                      <li><a class="dropdown-item" href="#">Quần áo Unisex</a></li>
-                      <li><a class="dropdown-item" href="#">Mỹ phẩm</a></li>
-                      <li><a class="dropdown-item" href="#">Đồ trẻ sơ sinh</a></li>
-                      <li><a class="dropdown-item" href="#">Giày dép nam</a></li>
-                      <li><a class="dropdown-item" href="#">Giày dép nữ</a></li>
-                      <li><a class="dropdown-item" href="#">Thiết bị điện tử</a></li>
-                      <li><a class="dropdown-item" href="#">Thời trang trẻ em</a></li>
-                      <li><a class="dropdown-item" href="#">Máy lọc nước</a></li>
-                      <li><a class="dropdown-item" href="#">Nồi cơm</a></li>
-                      <li><a class="dropdown-item" href="#">Nồi chảo</a></li>
+                      {% for category in categories %}
+                        <li><a class="dropdown-item" href="{% url 'category' %}?category={{category.slug}}">{{category.name}}</a></li>
+                      {% endfor %}
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href={% url 'cart' %}>Cart</a>
+                    <a class="nav-link" href="{% url 'cart' %}">Giỏ hàng</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href={% url 'shopping_guide' %}>Hướng dẫn mua hàng</a>
+                    <a class="nav-link" href="{% url 'shopping_guide' %}">Hướng dẫn mua hàng</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href={% url 'contact' %}>Liên hệ</a>
+                    <a class="nav-link" href="{% url 'contact' %}">Liên hệ</a>
                   </li>
                 </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
+                <form class="d-flex" role="search" method = POST action = "{% url 'search' %}">
+                  {% csrf_token %}
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name = "searched">
+                  <button class="btn btn-outline-success" type="submit">Tìm kiếm
+                  </button>
                 </form>
               </div>
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Hồ sơ
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Tài khoản của tôi</a></li>
-                    <li><a class="dropdown-item" href="{% url 'cart' %}">Đơn hàng</a></li>
-                    <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-                  </ul>
-                </li>
-                
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Đăng nhập</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Đăng ký</a>
-                </li>
+              <ul class="navbar-nav ms-3">
+                {% if user.is_authenticated %}
+                  <li class="nav-item d-flex align-items-center">
+                    <span class="me-2">Xin chào {{ request.user }}</span>
+                    <a class="nav-link" href="{% url 'logout' %}">Đăng xuất</a>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Đăng nhập</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Đăng ký</a>
+                  </li>
+                {% endif %}
               </ul>
               <div class='form-inline my-2 ly-lh-0'>
                 <a href="{% url 'cart' %}"><img id="cart-icon" src="{% static 'images/cart.png' %}"></a>
                 <p id = 'cart-total' >{{cartItems}}</p>
-                <p >0</p>
+        
               </div>
+
             </div>
           </nav>
         <!--main-->
-        {% block banner_slider %}{% endblock banner_slider %}
+        {% block banner_slider %}
+        {% if request.path == '/' %}
+            <div class="container-fluid p-0">
+                <img src="{% static 'app/images/banner.png' %}" class="img-fluid w-1000" style="max-height: 1000px; object-fit: cover;" alt="Banner">
+            </div>
+        {% endif %}
+        {% endblock %}
+    
+        
         {% block main-content %}{% endblock main-content %}
         {% block cart_content %}{% endblock cart_content %}
         {% block content_checkout %}{% endblock content_checkout %}
         {% block register %}{% endblock register %}
         <!--footer-->
+        
         <footer class= "container--fluid bg-success text-center fixed-bottom p-2 mt-5">
             Copyright 2025
         </footer>
         <script src="{%static 'app/js/cart.js' %}" </script></script>
     </body>
 </html>
- 
