@@ -5,23 +5,28 @@
 	<div class="col-lg-12">
 		<div class="box-element">
 
-			<a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Tiếp tục mua sắm</a>
+			<a class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Tiếp tục mua sắm</a>
 
-			<br>
-			<br>
+			<br><br>
+
 			<table class="table">
 				<tr>
 					<th><h5>{{order.get_cart_items}}<strong></strong></h5></th>
 					<th><h5>{{order.get_cart_total | floatformat:0}} VNĐ <strong></strong></h5></th>
 					<th>
-						<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Thanh toán</a>
+						<a style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Thanh toán</a>
 					</th>
 				</tr>
 			</table>
 
+			<!-- Thêm nút Xóa tất cả sản phẩm -->
+			<button id="clear-cart-btn">Xóa tất cả sản phẩm</button>
+
+
 		</div>
 
 		<br>
+
 		<div class="box-element">
 			<div class="cart-row">
 				<div style="flex:2"></div>
@@ -30,6 +35,7 @@
 				<div style="flex:1"><strong>Số lượng</strong></div>
 				<div style="flex:1"><strong>Tổng tiền</strong></div>
 			</div>
+
 			{% for item in items %}
 			<div class="cart-row">
 				<div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
@@ -38,9 +44,8 @@
 				<div style="flex:1">
 					<p class="quantity">{{item.quantity}}</p>
 					<div class="quantity">
-						<img data-product = {{item.product.id}} data-action = 'add' class="chg-quantity update-cart" src="{% static  'app/images/arrow-up.png' %}">
-				
-						<img data-product = {{item.product.id}} data-action = 'remove' class="chg-quantity update-cart" src="{% static  'app/images/arrow-down.png' %}">
+						<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static 'app/images/arrow-up.png' %}">
+						<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static 'app/images/arrow-down.png' %}">
 					</div>
 				</div>
 				<div style="flex:1"><p>{{item.get_total | floatformat:0}} VNĐ</p></div>
@@ -49,4 +54,33 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    // JavaScript để xử lý xóa tất cả sản phẩm trong giỏ hàng
+    document.getElementById('clear-cart-btn').addEventListener('click', function() {
+        if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm trong giỏ hàng?')) {
+            // Gửi yêu cầu xóa tất cả sản phẩm
+            fetch('/clear_cart/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Xử lý phản hồi sau khi xóa
+                if (data.success) {
+                    // Làm mới giỏ hàng hoặc hiển thị thông báo thành công
+                    alert('Giỏ hàng đã được xóa!');
+                    location.reload();  // Tải lại trang để cập nhật giỏ hàng
+                } else {
+                    alert('Có lỗi xảy ra khi xóa giỏ hàng.');
+                }
+            });
+        }
+    });
+</script>
+
 {% endblock cart_content %}

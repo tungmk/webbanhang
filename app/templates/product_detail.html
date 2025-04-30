@@ -9,8 +9,88 @@
             <h2>{{ product.name }}</h2>
             <p><strong>Giá:</strong> {{ product.price|floatformat:0 }} VNĐ</p>
             <p><strong>Mô tả:</strong> {{ product.description }}</p>
+
+            <!-- Số lượng có nút +/- -->
+            <label for="quantity"><strong>Số lượng:</strong></label>
+            <div class="input-group mb-3" style="width: 130px;">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button" onclick="decrement()">−</button>
+                </div>
+                <input type="text" id="quantity" class="form-control text-center" value="1">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
+                </div>
+            </div>
+
+            <!-- Thêm ô lời nhắn -->
+            <div class="mb-3">
+                <label for="order-note"><strong>Lời nhắn đến cửa hàng:</strong></label>
+                <textarea id="order-note" name="order-note" rows="3"
+                    class="form-control border border-danger rounded-4"
+                    placeholder="Thêm lời nhắn đến cửa hàng"></textarea>
+            </div>
+
+            <!-- Nút thêm vào giỏ hàng -->
             <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-primary update-cart">Thêm vào giỏ hàng</button>
         </div>
     </div>
 </div>
+
+<!-- JS tăng giảm số lượng -->
+<script>
+    function increment() {
+        var input = document.getElementById('quantity');
+        var current = parseInt(input.value) || 1;
+        input.value = current + 1;
+    }
+
+    function decrement() {
+        var input = document.getElementById('quantity');
+        var current = parseInt(input.value) || 1;
+        if (current > 1) input.value = current - 1;
+    }
+
+    var updateBtns = document.getElementsByClassName('update-cart');
+
+    for (var i = 0; i < updateBtns.length; i++) {
+        updateBtns[i].addEventListener('click', function () {
+            var productID = this.dataset.product;
+            var action = this.dataset.action;
+            var quantity = parseInt(document.getElementById('quantity').value) || 1;
+            var note = document.getElementById('order-note').value || "";
+
+            console.log('productID:', productID, 'action:', action, 'quantity:', quantity, 'note:', note);
+
+            if (user == "AnonymousUser") {
+                console.log('User is not logged in.');
+            } else {
+                updateUserOrder(productID, action, quantity, note);
+            }
+        });
+    }
+
+    function updateUserOrder(productID, action, quantity, note) {
+        console.log('User is logged in.');
+        var url = '/update_item/';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({
+                'productID': productID,
+                'action': action,
+                'quantity': quantity,
+                'note': note
+            })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('data:', data);
+            document.getElementById('cart-total').innerText = data.cart_total;
+        });
+    }
+</script>
 {% endblock %}

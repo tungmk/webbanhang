@@ -2,7 +2,67 @@
 {% load static %}
 
 {% block main-content %}
-    <div class="container mt-5">
-        <p>Liên hệ</p>
+<div class="container mt-5">
+    <h3 class="text-success fw-bold">LIÊN HỆ</h3>
+    <div class="row mt-4">
+        <!-- Thông tin liên hệ -->
+        <div class="col-md-4">
+            <div class="bg-success text-white p-3 rounded">
+                <h5 class="fw-bold">Shop anh Tùng Núi</h5>
+                <p>Địa chỉ: Số 10 Trần Phú Hà Đông, Hà Nội.</p>
+                <p>Hotline: 0326.223.456 - 0964.319.935</p>
+            </div>
+        </div>
+
+        <!-- Google Maps -->
+        <div class="col-md-8">
+            <iframe 
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7450.447844521892!2d105.7888468755953!3d20.98365928065438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135accf2e89d531%3A0x79a6a4e049e4116d!2zc-G7kSAxMCDEkC4gVHLhuqduIFBow7osIFAuIE3hu5kgTGFvLCBIw6AgxJDDtG5nLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2sus!4v1746015512451!5m2!1svi!2sus" width="1000" height="450" style="border:0;" ></iframe>                
+            </iframe>
+        </div>
     </div>
-{% endblock main-content%}
+
+    <!-- Form liên hệ -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h5 class="fw-bold">Shop anh Tùng Núi</h5>
+            <p><strong>Trụ sở Hà Nội:</strong> Số 10 Trần Phú Hà Đông, Hà Nội</p>
+            <p><strong>Hotline:</strong> 0326.223.456</p>
+        </div>
+
+        <div class="col-md-6 mt-4">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="name" class="form-control" placeholder="Họ tên" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="phone" class="form-control" placeholder="Số điện thoại" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="address" class="form-control" placeholder="Địa chỉ">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <input type="text" name="subject" class="form-control" placeholder="Chủ đề">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <textarea name="message" class="form-control" rows="4" placeholder="Nội dung"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success">Gửi</button>
+                        <button type="reset" class="btn btn-secondary">Nhập lại</button>
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary">Gửi</button>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

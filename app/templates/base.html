@@ -67,7 +67,7 @@
                     <a class="nav-link" href="{% url 'cart' %}">Giỏ hàng</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shopping_guide' %}">Hướng dẫn mua hàng</a>
+                    <a class="nav-link" href="{% url 'shopping_guide' %}">Hướng dẫn</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'contact' %}">Liên hệ</a>
@@ -120,9 +120,10 @@
         {% block view %}{% endblock view %}
         <!--footer-->
         
-        <footer class= "container--fluid bg-success text-center fixed-bottom p-2 mt-5">
-            Copyright 2025
-        </footer>
+        <footer class="bg-success text-center text-white py-3" style="position: relative; z-index: 10;">
+          <p class="mb-0">Copyright 2025</p>
+      </footer>
+      
         <script src="{%static 'app/js/cart.js' %}" </script></script>
     </body>
 </html>

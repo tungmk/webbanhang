@@ -120,3 +120,11 @@ body {
 	color: white;
   }
   
+  .thank-you-message {
+    text-align: center;
+    font-style: italic;
+    color: #555; /* màu xám tối */
+    font-size: 1.1rem;
+    margin-top: 30px;
+    line-height: 1.6;
+}  
