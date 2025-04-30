@@ -5,6 +5,9 @@ import json
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from .models import Product
+
 # Create your views here.
 def category(request):
     categories = Category.objects.filter(is_sub = False) # lay danh muc lon
@@ -138,3 +141,32 @@ def shopping_guide(request):
     super_categories = Category.objects.filter(is_sub = True)
     context={'categories':categories}
     return render(request, 'shopping_guide.html',context)
+def product_reviews(request, pk):
+    product = get_object_or_404(Product, id=pk)
+    return render(request, 'reviews.html', {'product': product})
+
+def product_comments(request, pk):
+    product = get_object_or_404(Product, id=pk)
+    return render(request, 'comments.html', {'product': product})
+
+def add_to_cart(request, pk):
+    # Tùy logic thêm sản phẩm vào giỏ hàng của bạn
+    quantity = int(request.POST.get('quantity', 1))
+    product = get_object_or_404(Product, id=pk)
+    # Xử lý thêm sản phẩm vào giỏ ở đây...
+    return redirect('cart')  # Chuyển về giỏ hàng
+
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'product_detail.html', {'product': product})
+
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+
+@login_required
+def dashboard(request):
+    if request.user.is_superuser:
+        return HttpResponse("Xin chào Admin!")
+    else:
+        return HttpResponse("Bạn không phải admin.")
