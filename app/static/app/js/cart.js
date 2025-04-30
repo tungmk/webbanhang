@@ -4,7 +4,7 @@ for (var i = 0; i < updateBtns.length; i++) {
     updateBtns[i].addEventListener('click', function () {
         var productID = this.dataset.product;
         var action = this.dataset.action;
-        var quantity = parseInt(this.closest('.product-container').querySelector('.quantity').value) || 1;  // Lấy số lượng từ input tương ứng
+        var quantity = parseInt(this.closest('.product-container').querySelector('.quantity').value) || 1;
 
         console.log('productID:', productID, 'action:', action, 'quantity:', quantity);
         console.log('user:', user);
@@ -36,32 +36,31 @@ function updateUserOrder(productID, action, quantity) {
     .then((response) => response.json())
     .then((data) => {
         console.log('data:', data);
-        // Cập nhật giỏ hàng trên giao diện người dùng mà không reload trang
-        document.getElementById('cart-total').innerText = data.cart_total;  // Giả sử dữ liệu trả về có thông tin giỏ hàng
+        document.getElementById('cart-total').innerText = data.cart_total;
     });
 }
 
+// Xử lý nút "Xóa tất cả sản phẩm"
 document.getElementById('clear-cart-btn').addEventListener('click', function () {
-    // Xóa toàn bộ nội dung giỏ hàng
-    const cartTableBody = document.querySelector('tbody'); // body của bảng sản phẩm
-    cartTableBody.innerHTML = ''; // xoá toàn bộ hàng sản phẩm
+    const cartTableBody = document.querySelector('tbody');
+    cartTableBody.innerHTML = '';
 
-    // Cập nhật tổng số lượng và tổng tiền
-    document.querySelector('body').querySelectorAll('div')[1].innerText = '0'; // Tổng số sản phẩm
-    document.querySelector('body').querySelectorAll('div')[2].innerText = '0 VNĐ'; // Tổng tiền
+    // Đặt lại tổng số lượng và tổng tiền
+    document.querySelector('body').querySelectorAll('div')[1].innerText = '0';
+    document.querySelector('body').querySelectorAll('div')[2].innerText = '0 VNĐ';
 
-    // Nếu bạn lưu giỏ hàng bằng localStorage
+    // Xóa giỏ hàng trong localStorage (nếu có)
     localStorage.removeItem('cart');
 
-    // Nếu cần gửi yêu cầu tới server để xóa trên database
+    // Gửi request tới server (nếu cần)
     /*
     fetch('/clear-cart', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({})
     }).then(response => {
         if (response.ok) {
-            // Xóa thành công trên server
+            // Xử lý khi xóa thành công
         }
     });
     */

@@ -19,7 +19,11 @@
                 <img class="thumbnail img-fluid" src="{{product.ImageURL}}" >
                 <h5 class="text-center mt-2">{{ product.name }}</h5> <!-- Tên sản phẩm -->
         <div class="d-flex justify-content-between align-items-center mt-2">
+<<<<<<< HEAD
           <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Thêm vào giỏ hàng</button>
+=======
+          <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to cart</button>
+>>>>>>> e3db79c2670805af98cafa9dc9c0ee15cdc5f9ec
           <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-success">View</a>
           <h5 class="mb-0"><strong>{{ product.price|floatformat:0 }} VNĐ</strong></h5>
               </div>

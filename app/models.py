@@ -19,7 +19,7 @@ class CreateUserForm(UserCreationForm):
 
     
 class Product(models.Model):
-    category = models.ManyToManyField(Category,related_name='product')
+    category = models.ManyToManyField(Category, related_name='products')
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
     digital = models.BooleanField(default=False, null=True, blank=False)
