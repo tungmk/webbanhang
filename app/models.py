@@ -78,4 +78,29 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
-    
+
+class VariationManager(models.Manager):
+    def colors(self):
+        # Trả về tất các bản ghi có loại là color
+        return super(VariationManager, self).filter(variation_category='color', is_active=True)
+
+    def sizes(self):
+        # Trả về tất các bản ghi có loại là size
+        return super(VariationManager, self).filter(variation_category='size', is_active=True)
+
+variation_category_choice = (
+    ('color', 'color'),
+    ('size', 'size'),
+)
+
+class Variation(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE) # Khóa ngoài là product_id
+    variation_category = models.CharField(max_length=100, choices=variation_category_choice) # Gồm 2 loại cố định là color và size
+    variation_value = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    objects = VariationManager()
+
+    def __str__(self):
+        return self.variation_value

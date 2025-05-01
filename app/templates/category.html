@@ -1,36 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"
-        <title> </title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        {% block register %}
-        
-        <div class="row" | style="width:100%">
-            {%for product in products %}
-              <div class="col-lg-3 col-md-6 mb-4">
-                <img class="thumbnail img-fluid" src="{{product.ImageURL}}" >
-                <h5 class="text-center mt-2">{{ product.name }}</h5> <!-- Tên sản phẩm -->
+{% block register %}
+<div class="container">
+  <div class="row" style="width: 100%">
+    {% for product in products %}
+      <div class="col-lg-3 col-md-6 mb-4">
+        <img class="thumbnail img-fluid" src="{{ product.ImageURL }}" alt="{{ product.name }}">
+        <h5 class="text-center mt-2">{{ product.name }}</h5>
+
         <div class="d-flex justify-content-between align-items-center mt-2">
-<<<<<<< HEAD
-          <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Thêm vào giỏ hàng</button>
-=======
-          <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to cart</button>
->>>>>>> e3db79c2670805af98cafa9dc9c0ee15cdc5f9ec
-          <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-success">View</a>
-          <h5 class="mb-0"><strong>{{ product.price|floatformat:0 }} VNĐ</strong></h5>
-              </div>
-              </div>
-            {% endfor %}
-          </div>
-          <br><br>
-        {% endblock register %}
-    </body>
-</html>
+          <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">
+            Thêm vào giỏ hàng
+          </button>
+          <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-success">Xem chi tiết</a>
+        </div>
+
+        <h5 class="text-center mt-2"><strong>{{ product.price|floatformat:0 }} VNĐ</strong></h5>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock register %}

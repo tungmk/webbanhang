@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from .models import Product
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def category(request):
@@ -160,3 +162,27 @@ def add_to_cart(request, pk):
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'product_detail.html', {'product': product})
+
+@login_required
+def clear_cart(request):
+    if request.method == 'POST':
+        try:
+            # Lấy giỏ hàng chưa thanh toán của user
+            order = Order.objects.filter(customer=request.user, complete=False).first()
+            
+            if order:
+                # Xóa tất cả OrderItem liên quan
+                order.orderitem_set.all().delete()
+                
+                # Cập nhật lại thông tin giỏ hàng (nếu cần)
+                order.transaction_id = None
+                order.save()
+                
+                return JsonResponse({'success': True, 'message': 'Giỏ hàng đã được xóa!'})
+            else:
+                return JsonResponse({'success': False, 'message': 'Không tìm thấy giỏ hàng'})
+        
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': str(e)})
+    
+    return JsonResponse({'success': False, 'message': 'Yêu cầu không hợp lệ'})

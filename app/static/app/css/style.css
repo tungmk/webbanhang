@@ -1,130 +1,143 @@
-/* Bố cục tổng thể */
-body {
-	font-family: Arial, sans-serif;
-	background: #6ca3db;
-	margin: 0;
-	padding: 20px;
-  }
-  
-  .product-container {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 20px;
-	justify-content: center;
-  }
-  
-  /* Thẻ sản phẩm kiểu Shopee */
-  .product-card {
-	width: 100%;
-	max-width: 240px;
-	height: 100%;
-	border: 1px solid #f0f0f0;
-	border-radius: 8px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-	overflow: hidden;
-	background: white;
-	display: flex;
-	flex-direction: column;
-	transition: 0.3s ease;
-  }
-  
-  .product-card:hover {
-	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-	transform: translateY(-4px);
-  }
-  
-  /* Hình ảnh sản phẩm */
-  .product-image {
-	width: 100%;
-	height: 200px;
-	object-fit: cover;
-	display: block;
-  }
-  
-  /* Nội dung bên trong */
-  .product-info {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	padding: 12px;
-	text-align: center;
-  }
-  
-  /* Tên sản phẩm */
-  .product-name {
-	font-size: 16px;
-	font-weight: 600;
-	color: #222;
-	margin-bottom: 8px;
-	height: 40px;
-	overflow: hidden;
-  }
-  
-  /* Giá sản phẩm */
-  .product-price {
-	display: flex;
-	justify-content: center;
-	align-items: baseline;
-	gap: 4px;
-	color: #ee4d2d;
-	font-weight: bold;
-	margin-bottom: 12px;
-  }
-  
-  .price-value {
-	font-size: 20px;
-  }
-  
-  .currency {
-	font-size: 12px;
-	margin-top: 2px;
-  }
-  
-  /* Nút bấm */
-  .button-group {
-	display: flex;
-	gap: 6px;
-	justify-content: center;
-  }
-  
-  .btn {
-	padding: 6px 12px;
-	border-radius: 5px;
-	font-size: 14px;
-	font-weight: 600;
-	cursor: pointer;
-	transition: all 0.2s ease-in-out;
-	border: 2px solid transparent;
-  }
-  
-  .btn-outline-success {
-	border-color: #28a745;
-	color: #28a745;
-	background-color: transparent;
-  }
-  
-  .btn-outline-success:hover {
-	background-color: #28a745;
-	color: white;
-  }
-  
-  .btn-outline-info {
-	border-color: #007bff;
-	color: #007bff;
-	background-color: transparent;
-  }
-  
-  .btn-outline-info:hover {
-	background-color: #007bff;
-	color: white;
-  }
-  
-  .thank-you-message {
+/* Reset chiều cao và bố cục toàn trang */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #6ca3db;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Nội dung chính chiếm chiều cao còn lại để đẩy footer xuống đáy */
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Footer luôn nằm cuối và có màu nền xanh */
+.footer {
+    background-color: #218455;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+/* Phần container sản phẩm */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Card sản phẩm */
+.product-card {
+    width: 100%;
+    max-width: 240px;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+    text-align: center;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 8px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.product-price {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 4px;
+    color: #ee4d2d;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.price-value {
+    font-size: 20px;
+}
+
+.currency {
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.button-group {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+}
+
+.btn-outline-success {
+    border-color: #28a745;
+    color: #28a745;
+    background-color: transparent;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-outline-info {
+    border-color: #007bff;
+    color: #007bff;
+    background-color: transparent;
+}
+
+.btn-outline-info:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.thank-you-message {
     text-align: center;
     font-style: italic;
-    color: #555; /* màu xám tối */
+    color: #555;
     font-size: 1.1rem;
     margin-top: 30px;
     line-height: 1.6;
-}  
+}
