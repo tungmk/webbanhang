@@ -11,16 +11,12 @@
             <p><strong>Mô tả:</strong> {{ product.description }}</p>
 
             <!-- Số lượng có nút +/- -->
-            <label for="quantity"><strong>Số lượng:</strong></label>
-            <div class="input-group mb-3" style="width: 130px;">
-                <div class="input-group-prepend">
-                    <button class="btn btn-outline-secondary" type="button" onclick="decrement()">−</button>
-                </div>
-                <input type="text" id="quantity" class="form-control text-center" value="1">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
-                </div>
-            </div>
+            <div>
+                <label for="quantity">Số lượng:</label>
+                <input type="number" id="quantity" value="1" min="1">
+                <button onclick="increment()">+</button>
+                <button onclick="decrement()">-</button>
+              </div>
 
             <!-- Thêm ô lời nhắn -->
             <div class="mb-3">

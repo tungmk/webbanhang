@@ -6,22 +6,11 @@
 		<div class="box-element">
 
 			<a class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Tiếp tục mua sắm</a>
-
 			<br><br>
 
-			<table class="table">
-				<tr>
-					<th><h5>{{order.get_cart_items}}<strong></strong></h5></th>
-					<th><h5>{{order.get_cart_total | floatformat:0}} VNĐ <strong></strong></h5></th>
-					<th>
-						<a style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Thanh toán</a>
-					</th>
-				</tr>
-			</table>
-
+			<!-- Xóa bảng tổng phía trên -->
 			<!-- Thêm nút Xóa tất cả sản phẩm -->
 			<button class="btn btn-danger" id="clear-cart-btn">Xóa tất cả sản phẩm</button>
-
 		</div>
 
 		<br>
@@ -50,15 +39,19 @@
 				<div style="flex:1"><p>{{item.get_total | floatformat:0}} VNĐ</p></div>
 			</div>
 			{% endfor %}
+
+			<!-- Tổng tiền đưa xuống dưới, căn phải -->
+			<div style="text-align: right; padding: 20px 10px 0 0;">
+				<h5><strong>Tổng tiền phải trả:</strong> {{order.get_cart_total | floatformat:0}} VNĐ</h5>
+				<a class="btn btn-success" href="{% url 'checkout' %}" style="margin-top: 10px;">Thanh toán</a>
+			</div>
 		</div>
 	</div>
 </div>
 
 <script>
-    // JavaScript để xử lý xóa tất cả sản phẩm trong giỏ hàng
     document.getElementById('clear-cart-btn').addEventListener('click', function() {
         if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm trong giỏ hàng?')) {
-            // Gửi yêu cầu xóa tất cả sản phẩm
             fetch('/clear_cart/', {
                 method: 'POST',
                 headers: {
@@ -69,11 +62,9 @@
             })
             .then(response => response.json())
             .then(data => {
-                // Xử lý phản hồi sau khi xóa
                 if (data.success) {
-                    // Làm mới giỏ hàng hoặc hiển thị thông báo thành công
                     alert('Giỏ hàng đã được xóa!');
-                    location.reload();  // Tải lại trang để cập nhật giỏ hàng
+                    location.reload();
                 } else {
                     alert('Có lỗi xảy ra khi xóa giỏ hàng.');
                 }
