@@ -114,18 +114,24 @@ def updateItem(request):
     data = json.loads(request.body)
     productID = data['productID']
     action = data['action']
+    quantity = int(data.get('quantity', 1))  # lấy số lượng từ client
+
     customer = request.user
-    product = Product.objects.get(id = productID)
-    order, created = Order.objects.get_or_create(customer = customer, complete = False)
-    orderItem, created = OrderItem.objects.get_or_create(order = order, product = product)
+    product = Product.objects.get(id=productID)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+
     if action == 'add':
-        orderItem.quantity += 1
-    elif action == 'remove':    
-        orderItem.quantity -=1
+        orderItem.quantity += quantity  # ✅ tăng theo số lượng client gửi
+    elif action == 'remove':
+        orderItem.quantity -= quantity
+
     orderItem.save()
+
     if orderItem.quantity <= 0:
         orderItem.delete()
-    return JsonResponse('Added', safe=False)
+
+    return JsonResponse({'message': 'Đã cập nhật', 'cart_total': order.get_cart_items()}, safe=False)
     
 def contact(request):
     categories = Category.objects.filter(is_sub = False) # lay danh muc lon

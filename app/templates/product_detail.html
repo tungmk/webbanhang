@@ -11,28 +11,33 @@
             <p><strong>Mô tả:</strong> {{ product.description }}</p>
 
             <!-- Số lượng có nút +/- -->
-            <div>
-                <label for="quantity">Số lượng:</label>
-                <input type="number" id="quantity" value="1" min="1">
-                <button onclick="increment()">+</button>
-                <button onclick="decrement()">-</button>
-              </div>
+            <div class="mb-3">
+                <label for="quantity"><strong>Số lượng:</strong></label>
+                <div class="input-group" style="max-width: 150px;">
+                    <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
+                    <input type="number" id="quantity" class="form-control text-center" value="1" min="1">
+                    <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
+                </div>
+            </div>
 
-            <!-- Thêm ô lời nhắn -->
+            <!-- Lời nhắn -->
             <div class="mb-3">
                 <label for="order-note"><strong>Lời nhắn đến cửa hàng:</strong></label>
                 <textarea id="order-note" name="order-note" rows="3"
-                    class="form-control border border-danger rounded-4"
-                    placeholder="Thêm lời nhắn đến cửa hàng"></textarea>
+                          class="form-control border border-danger rounded-4"
+                          placeholder="Thêm lời nhắn đến cửa hàng"></textarea>
             </div>
 
             <!-- Nút thêm vào giỏ hàng -->
-            <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-primary update-cart">Thêm vào giỏ hàng</button>
+            <button data-product="{{ product.id }}" data-action="add"
+                    class="btn btn-outline-primary update-cart">
+                Thêm vào giỏ hàng
+            </button>
         </div>
     </div>
 </div>
 
-<!-- JS tăng giảm số lượng -->
+<!-- JS -->
 <script>
     function increment() {
         var input = document.getElementById('quantity');
@@ -46,19 +51,17 @@
         if (current > 1) input.value = current - 1;
     }
 
-    var updateBtns = document.getElementsByClassName('update-cart');
+    const updateBtns = document.getElementsByClassName('update-cart');
 
-    for (var i = 0; i < updateBtns.length; i++) {
+    for (let i = 0; i < updateBtns.length; i++) {
         updateBtns[i].addEventListener('click', function () {
-            var productID = this.dataset.product;
-            var action = this.dataset.action;
-            var quantity = parseInt(document.getElementById('quantity').value) || 1;
-            var note = document.getElementById('order-note').value || "";
+            const productID = this.dataset.product;
+            const action = this.dataset.action;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+            const note = document.getElementById('order-note').value || "";
 
-            console.log('productID:', productID, 'action:', action, 'quantity:', quantity, 'note:', note);
-
-            if (user == "AnonymousUser") {
-                console.log('User is not logged in.');
+            if (user === "AnonymousUser") {
+                alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
             } else {
                 updateUserOrder(productID, action, quantity, note);
             }
@@ -66,8 +69,7 @@
     }
 
     function updateUserOrder(productID, action, quantity, note) {
-        console.log('User is logged in.');
-        var url = '/update_item/';
+        const url = '/update_item/';
 
         fetch(url, {
             method: 'POST',
@@ -76,16 +78,16 @@
                 'X-CSRFToken': csrftoken,
             },
             body: JSON.stringify({
-                'productID': productID,
-                'action': action,
-                'quantity': quantity,
-                'note': note
+                productID: productID,
+                action: action,
+                quantity: quantity,
+                note: note
             })
         })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('data:', data);
-            document.getElementById('cart-total').innerText = data.cart_total;
+        .then(response => response.json())
+        .then(data => {
+            console.log('Giỏ hàng cập nhật:', data);
+            location.reload(); // Cập nhật lại trang để hiện số lượng mới
         });
     }
 </script>
