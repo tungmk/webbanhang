@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% block register %}
+<div class="container py-5">
+    <div class="card border-0 shadow-sm">
+        <div class="row g-0">
+            <!-- Hình ảnh sản phẩm -->
+            <div class="col-md-6 p-0">
+                <div class="product-image-container">
+                    <img src="{{ product.ImageURL }}" class="product-detail-img" alt="{{ product.name }}">
+                </div>
+            </div>
+            
+            <!-- Thông tin sản phẩm -->
+            <div class="col-md-6">
+                <div class="card-body p-4 p-md-5">
+                    <nav aria-label="breadcrumb" class="mb-4 d-none d-md-block">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Trang chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+                        </ol>
+                    </nav>
+                    
+                    <h1 id="product-name" class="product-title mb-3">{{ product.name }}</h1>
+                    
+                    <div class="product-price mb-4">
+                        <span class="price-value" data-value="{{ product.price|floatformat:0 }}">{{ product.price|floatformat:0 }}</span> VNĐ
+                    </div>
+                    
+                    <div class="product-description mb-4">
+                        <h5 class="mb-2">Mô tả sản phẩm</h5>
+                        <p class="text-muted">{{ product.description }}</p>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <!-- Số lượng có nút +/- -->
+                    <div class="mb-4">
+                        <label for="quantity" class="form-label fw-bold mb-2">Số lượng:</label>
+                        <div class="input-group" style="max-width: 150px;">
+                            <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
+                            <input type="number" id="quantity" class="form-control text-center" value="1" min="1">
+                            <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Nút thêm vào giỏ hàng -->
+                    <button data-product="{{ product.id }}" data-action="add"
+                        class="btn btn-primary btn-lg add-to-cart-btn update-cart"
+                        onclick="addToCart()">Thêm vào giỏ hàng
+                    </button>
+                    <script>
+                        function addToCart() {
+                            const productName = document.getElementById("product-name").innerText;
+                            const quantity = document.getElementById("quantity").value;
+                            alert(`Bạn đã thêm ${productName} vào giỏ hàng, số lượng: ${quantity}`);
+                            
+                            // Ở đây bạn có thể gọi thêm hàm gửi dữ liệu lên server nếu cần
+                        }
+                        </script>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Cải thiện giao diện trang chi tiết sản phẩm */
+    .product-image-container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background-color: #f8f9fa;
+    }
+    
+    .product-detail-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 20px;
+    }
+    
+    .product-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+    
+    .product-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #e74c3c;
+    }
+    
+    .product-description {
+        line-height: 1.6;
+    }
+    
+    /* Cải thiện nút thêm vào giỏ hàng */
+    .add-to-cart-btn {
+        padding: 12px 24px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+    
+    .add-to-cart-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .product-detail-img {
+            max-height: 350px;
+        }
+        
+        .product-title {
+            font-size: 1.5rem;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- JS -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Hàm định dạng số với dấu "." ngăn cách hàng nghìn
+        function formatNumberWithDots(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        
+        // Áp dụng định dạng cho giá sản phẩm
+        const priceElements = document.querySelectorAll('.price-value');
+        priceElements.forEach(element => {
+            const originalValue = element.getAttribute('data-value');
+            if (originalValue) {
+                element.textContent = formatNumberWithDots(originalValue);
+            }
+        });
+    });
+
+    function increment() {
+        var input = document.getElementById('quantity');
+        var current = parseInt(input.value) || 1;
+        input.value = current + 1;
+    }
+
+    function decrement() {
+        var input = document.getElementById('quantity');
+        var current = parseInt(input.value) || 1;
+        if (current > 1) input.value = current - 1;
+    }
+
+    const updateBtns = document.getElementsByClassName('update-cart');
+
+    for (let i = 0; i < updateBtns.length; i++) {
+        updateBtns[i].addEventListener('click', function () {
+            const productID = this.dataset.product;
+            const action = this.dataset.action;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+
+            if (user === "AnonymousUser") {
+                alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
+            } else {
+                updateUserOrder(productID, action, quantity);
+            }
+        });
+    }
+
+    function updateUserOrder(productID, action, quantity) {
+        const url = '/update_item/';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({
+                productID: productID,
+                action: action,
+                quantity: quantity
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Giỏ hàng cập nhật:', data);
+            location.reload(); // Cập nhật lại trang để hiện số lượng mới
+        });
+    }
+</script>
+{% endblock %}

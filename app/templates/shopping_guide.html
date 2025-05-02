@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main-content %}
+<div class="container mt-5">
+    <div class="guide-header">
+        <alt="Hướng dẫn sử dụng quần áo của shop" class="guide-image">
+        <h3>Hướng dẫn sử dụng sản phẩm <span class="text-uppercase">QUẦN ÁO CỦA SHOP</span> đúng cách</h3>
+        <p>
+            <strong>Shop anh Tùng</strong> xin hướng dẫn các bạn cách giặt đồ và bảo quản đúng cách.
+            Các mặt hàng áo tại <strong class="text-danger">Shop anh Tùng Núi</strong> đều được sản xuất bằng chất liệu 100% cotton và thun 65/35,
+            vì vậy các bạn cần lưu ý hướng dẫn sau đây để giúp áo của bạn được bền đẹp.
+        </p>
+    </div>    
+    <div class="row mt-4">
+        {% comment "Mỗi mục hướng dẫn" %}
+        {% for huongdan in huongdans %}
+        <div class="col-md-6 mb-4">
+            <div class="p-3 border rounded shadow-sm">
+                <h5 class="fw-bold text-primary">{{ huongdan.title }}</h5>
+                <ul class="mb-0">
+                    {% for step in huongdan.steps %}
+                    <li>{{ step }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+        {% endcomment %}
+
+        <!-- Dữ liệu tĩnh theo ảnh bạn gửi -->
+        <div class="col-md-6 mb-4">
+            <div class="p-3 border rounded">
+                <h5 class="text-primary">1. Giặt áo bằng tay</h5>
+                <ul>
+                    <li>Lộn bề trái áo lại, rồi dùng tay vò từ từ.</li>
+                    <li>Tránh không đổ trực tiếp nước tẩy lên áo.</li>
+                    <li>Giặt sạch, sau đó dùng nước xả làm mềm vải.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="p-3 border rounded">
+                <h5 class="text-danger">2. Giặt áo bằng máy giặt</h5>
+                <ul>
+                    <li>Chỉnh máy ở mức trung bình để tránh làm giãn áo.</li>
+                    <li>Ngâm áo trong thời gian ngắn.</li>
+                    <li>Giặt áo bằng máy dễ làm cho áo bị nhàu.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="p-3 border rounded">
+                <h5 class="text-success">3. Dùng tay vỗ nhẹ vào áo khi phơi</h5>
+                <ul>
+                    <li>Sau khi giặt xong, dùng tay vỗ nhẹ vào áo khi phơi.</li>
+                    <li>Như vậy áo sẽ mau khô và không bị nhăn.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="p-3 border rounded">
+                <h5 class="text-danger">4. Tránh vắt áo</h5>
+                <ul>
+                    <li>Tránh vắt áo mạnh tay, vải áo sẽ bị nhăn.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="p-3 border rounded">
+                <h5 class="text-purple">5. Nên phơi áo ở nơi có nhiều gió</h5>
+                <ul>
+                    <li>Nên phơi áo ở nơi có nhiều gió.</li>
+                    <li>Nên trải thẳng áo khi phơi.</li>
+                    <li>Tránh phơi ở nơi có ánh nắng trực tiếp.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="p-3 border rounded">
+                <h5 class="text-warning">6. Không nên phơi áo bằng móc</h5>
+                <ul>
+                    <li>Phơi áo bằng móc thì cổ áo, vai áo sẽ bị giãn và biến dạng.</li>
+                    <li>Không nên phơi ở nơi có ánh nắng gay gắt, áo sẽ bị bạc màu.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h4 class="fw-bold text-primary">1. Giặt áo</h4>
+            <ul>
+                <li>Lần giặt đầu tiên bạn nên vò bằng tay, giặt bằng nước lã và không sử dụng xà phòng. Không nên giặt chung áo trắng với các loại áo đậm màu như đỏ, cam, xanh đen…</li>
+                <li>Mẹo nhỏ: Ngâm áo mới với nước ấm pha ít giấm trong khoảng 15 phút sẽ giúp áo giữ màu tốt, đặc biệt với vải thun và đồ jean.</li>
+                <li>Không giặt bằng nước nóng quá 40°C, giặt bằng nước lạnh sẽ giúp áo không bị giãn hay chảy xệ.</li>
+                <li>Không đổ trực tiếp xà phòng, nước tẩy lên hình in. Tránh dùng xà phòng giặt tẩy mạnh hoặc thuốc tẩy cho áo màu.</li>
+                <li>Hạn chế dùng nước xả làm mềm vải vì có thể làm giãn áo và bong tróc hình in. Nếu muốn thơm, hãy dùng nước xả thơm nhẹ.</li>
+                <li>Nên giặt bằng tay và lộn trái áo để tránh bong tróc hình in.</li>
+                <li>Không nên vắt mạnh áo thun sau khi giặt vì dễ làm giãn áo. Tốt nhất là gập áo lại, vỗ nhẹ và phơi thẳng để áo nhanh khô và không bị nhăn.</li>
+            </ul>
+        </div>
+        <div class="mt-4">
+            <h4 class="fw-bold text-success">2. Bảo quản</h4>
+            <ul>
+                <li>Không nên để áo ở nơi ẩm ướt vì áo dễ bị ẩm mốc và để lại vết ố.</li>
+                <li>Sau khi mặc đi tập luyện hoặc ra nhiều mồ hôi, nên giặt ngay để tránh mùi hôi và ẩm mốc.</li>
+                <li>Khi phơi áo nên lộn trái, chọn nơi mát, tránh nắng trực tiếp để tránh phai màu và chảy xệ. Nên phơi ngang thay vì dùng móc để giữ form áo.</li>
+                <li>Với áo thun cotton 100%, sau khi giặt dễ bị nhăn. Khi ủi, không được ủi trực tiếp lên hình in, nên ủi mặt trái với nhiệt độ thấp.</li>
+                <li>Với áo có hình in lớn hoặc 2 mặt in, không nên gấp để chúng dính nhau. Tốt nhất nên treo hoặc gấp đôi áo lại.</li>
+            </ul>
+        </div>         
+        <div class="thank-you-message text-center text-blue mt-4">
+            <p>Cảm ơn quý khách đã dành thời gian đọc những hướng dẫn này.</p>
+            <p>Chúng tôi chúc quý khách có những trải nghiệm tuyệt vời với những sản phẩm của chúng tôi.</p>
+        </div>         
+    </div>
+</div>
+{% endblock main-content %}
