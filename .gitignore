@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.log
+*.sqlite3
+*.pyc
+
+# Virtual Environment
+venv/
+env/
+
+# Django-specific
+db.sqlite3
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.migrations/

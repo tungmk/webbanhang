@@ -2,66 +2,167 @@
 {% load static %}
 {% block content_checkout %}
 <div class="row" style='width: 100%;'>
-    <div class="col-lg-6">
-        <div class="box-element" id="form-wrapper">
-            <form id="form" method="post" action="{% url 'payment' %}">
-                {% csrf_token %}
-                <div id="user-info">
-                    <div class="form-field">
-                        <input required class="form-control" type="text" name="name" placeholder="Họ và Tên..">
+    <form id="form" method="post" action="{% url 'payment_request' %}">
+        {% comment %} <div class="col-lg-6">
+            <div class="box-element" id="form-wrapper">
+                    {% csrf_token %}
+                    <div id="user-info">
+                        <div class="form-field">
+                            <input required class="form-control" type="text" name="name" placeholder="Họ và Tên..">
+                        </div>
+                        <div class="form-field">
+                            <input required class="form-control" type="email" name="email" placeholder="Email..">
+                        </div>
                     </div>
-                    <div class="form-field">
-                        <input required class="form-control" type="email" name="email" placeholder="Email..">
+                    
+                    <div id="shipping-info">
+                        <hr>
+                        <p>Thông tin đơn hàng:</p>
+                        <hr>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="address" placeholder="Địa chỉ..">
+                        </div>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="city" placeholder="Thành phố..">
+                        </div>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="state" placeholder="Quận (Huyện)..">
+                        </div>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+                        </div>
                     </div>
-                </div>
-                
-                <div id="shipping-info">
+
                     <hr>
-                    <p>Thông tin đơn hàng:</p>
-                    <hr>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="address" placeholder="Địa chỉ..">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="city" placeholder="Thành phố..">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="state" placeholder="Quận (Huyện)..">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
-                    </div>
-                </div>
-
-                <hr>
-                <input id="form-button" class="btn btn-success w-100" type="submit" value="Tiếp tục">
-            </form>
-        </div>
-
-        <br>
-        <div class="box-element hidden" id="payment-info">
-            <small>Lựa chọn Phương thức</small>
-        </div>
-        
-    </div>
-
-    <div class="col-lg-6">
-        <div class="box-element">
-            <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Quay lại giỏ hàng</a>
-            <hr>
-            <h3>Tóm tắt đơn hàng</h3>
-            <hr>
-            {% for item in items %}
-            <div class="cart-row">
-                <div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
-                <div style="flex:2"><p>{{item.product.name}}</p></div>
-                <div style="flex:1"><p>{{item.product.price | floatformat:0}} VNĐ</p></div>
-                <div style="flex:1"><p>{{item.quantity}}</p></div>
+                    <input id="form-button" class="btn btn-success w-100" type="submit" value="Tiếp tục">
             </div>
-            {% endfor %}
-            <h5>Items: {{order.get_cart_items}}</h5>
-            <h5>Total: {{order.get_cart_total | floatformat:0}} VNĐ</h5>
+
+            <br>
+            <div class="box-element hidden" id="payment-info">
+                <small>Lựa chọn Phương thức</small>
+            </div>
+            
+        </div> {% endcomment %}
+
+        <div class="col-lg-6">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Quay lại giỏ hàng</a>
+                <hr>
+                <h3>Tóm tắt đơn hàng</h3>
+                <hr>
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
+                    <div style="flex:2">
+                        <p>{{item.product.name}}</p>
+                        <input type="hidden" name="productName" value="{{item.product.name}}">
+                    </div>
+                    <div style="flex:1"><p>{{item.product.price | floatformat:0}} VNĐ</p></div>
+                    <div style="flex:1"><p>{{item.quantity}}</p></div>
+                    <div style="flex:1"><p>{{item.get_total | floatformat:0}} VNĐ</p></div>
+                </div>
+                {% endfor %}
+                <h5>Items: {{order.get_cart_items}}</h5>
+                <input type="hidden" name="itemQuantity" value="{{order.get_cart_items}}">
+                <h5>Total: {{order.get_cart_total | floatformat:0}} VNĐ</h5>
+            </div>
         </div>
-    </div>
+
+
+        <h3>THANH TOÁN QUA THẺ NGÂN HÀNG</h3>
+        <div class="table-responsive">
+            <div class="form-group">
+                <div class="box-element" id="form-wrapper">
+                    {% csrf_token %}
+                    <div id="user-info">
+                        <div class="form-field">
+                            <input required class="form-control" type="text" name="name" placeholder="Họ và Tên..">
+                        </div>
+                        <div class="form-field">
+                            <input required class="form-control" type="email" name="email" placeholder="Email..">
+                        </div>
+                    </div>
+                    
+                    <div id="shipping-info">
+                        <hr>
+                        <p>Thông tin đơn hàng:</p>
+                        <hr>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="address" placeholder="Địa chỉ..">
+                        </div>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="city" placeholder="Thành phố..">
+                        </div>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="state" placeholder="Quận (Huyện)..">
+                        </div>
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+                        </div>
+                    </div>
+                </div>
+
+                <select name="order_type" id="order_type" class="form-control">
+                    <option value="topup">Thanh toán hóa đơn</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="order_id">Mã hóa đơn</label>
+                <input class="form-control" id="order_id"
+                        name="order_id" type="text" value="{{ order_id }}"/> 
+            </div>
+            <div class="form-group">
+                <label for="amount">Số tiền</label>
+                <input class="form-control" id="amount"
+                        name="amount" type="number" value="{{order.get_cart_total | floatformat:0}}"/>
+            </div>
+            <div class="form-group">
+                <label for="order_desc">Nội dung thanh toán</label>
+                <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">
+                    Thanh toán đơn hàng {{ order_id }} với tổng số tiền là {{order.get_cart_total | floatformat:0}} VNĐ vào lúc: {% now "Y-m-d H:i:s" %}
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label for="bank_code">Ngân hàng</label>
+                <select name="bank_code" id="bank_code" class="form-control">
+                    <option value="">Không chọn</option>
+                    <option value="NCB"> Ngan hang NCB</option>
+                    <option value="AGRIBANK"> Ngan hang Agribank</option>
+                    <option value="SCB"> Ngan hang SCB</option>
+                    <option value="SACOMBANK">Ngan hang SacomBank</option>
+                    <option value="EXIMBANK"> Ngan hang EximBank</option>
+                    <option value="MSBANK"> Ngan hang MSBANK</option>
+                    <option value="NAMABANK"> Ngan hang NamABank</option>
+                    <option value="VNMART"> Vi dien tu VnMart</option>
+                    <option value="VIETINBANK">Ngan hang Vietinbank</option>
+                    <option value="VIETCOMBANK"> Ngan hang VCB</option>
+                    <option value="HDBANK">Ngan hang HDBank</option>
+                    <option value="DONGABANK"> Ngan hang Dong A</option>
+                    <option value="TPBANK"> Ngân hàng TPBank</option>
+                    <option value="OJB"> Ngân hàng OceanBank</option>
+                    <option value="BIDV"> Ngân hàng BIDV</option>
+                    <option value="TECHCOMBANK"> Ngân hàng Techcombank</option>
+                    <option value="VPBANK"> Ngan hang VPBank</option>
+                    <option value="MBBANK"> Ngan hang MBBank</option>
+                    <option value="ACB"> Ngan hang ACB</option>
+                    <option value="OCB"> Ngan hang OCB</option>
+                    <option value="IVB"> Ngan hang IVB</option>
+                    <option value="VISA"> Thanh toan qua VISA/MASTER</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="language">Ngôn ngữ</label>
+                <select name="language" id="language" class="form-control">
+                    <option value="vn">Tiếng Việt</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-default">Thực hiện thanh toán</button>
+            {% csrf_token %}
+            <div class="form-group"></div>
+        </div>
+    </form>
+
 </div>
 {% endblock content_checkout %}

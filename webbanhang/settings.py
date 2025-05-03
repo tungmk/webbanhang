@@ -59,6 +59,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -78,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sitesale',
         'USER': 'root',
-        'PASSWORD': '12345678',
+        'PASSWORD': 'Killingyourself1@',
         'HOST':'localhost'
     }
 }
@@ -136,3 +137,9 @@ MEDIA_URL = '/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'app/static/images')
 
+# VNPAY CONFIG
+VNPAY_RETURN_URL = 'http://localhost:8000/payment_return'  # get from config
+VNPAY_PAYMENT_URL = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'  # get from config
+VNPAY_API_URL = 'https://sandbox.vnpayment.vn/merchant_webapi/api/transaction'
+VNPAY_TMN_CODE = 'PEXIV61K'  # Website ID in VNPAY System, get from config
+VNPAY_HASH_SECRET_KEY = 'YNA3BHO1E78JPQ2WAFU4XPBFAPPK6ZXB'  # Secret key for create checksum,get from config

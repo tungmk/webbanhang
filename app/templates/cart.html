@@ -16,35 +16,37 @@
 		<br>
 
 		<div class="box-element">
-			<div class="cart-row">
-				<div style="flex:2"></div>
-				<div style="flex:2"><strong>Mặt hàng</strong></div>
-				<div style="flex:1"><strong>Giá</strong></div>
-				<div style="flex:1"><strong>Số lượng</strong></div>
-				<div style="flex:1"><strong>Tổng tiền</strong></div>
-			</div>
-
-			{% for item in items %}
-			<div class="cart-row">
-				<div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
-				<div style="flex:2"><p>{{item.product.name}}</p></div>
-				<div style="flex:1"><p>{{item.product.price | floatformat:0}} VNĐ</p></div>
-				<div style="flex:1">
-					<p class="quantity">{{item.quantity}}</p>
-					<div class="quantity">
-						<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static 'app/images/arrow-up.png' %}">
-						<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static 'app/images/arrow-down.png' %}">
-					</div>
+			<form id="form" method="get" action="{% url 'checkout' %}">
+				<div class="cart-row">
+					<div style="flex:2"></div>
+					<div style="flex:2"><strong>Mặt hàng</strong></div>
+					<div style="flex:1"><strong>Giá</strong></div>
+					<div style="flex:1"><strong>Số lượng</strong></div>
+					<div style="flex:1"><strong>Tổng tiền</strong></div>
 				</div>
-				<div style="flex:1"><p>{{item.get_total | floatformat:0}} VNĐ</p></div>
-			</div>
-			{% endfor %}
 
-			<!-- Tổng tiền đưa xuống dưới, căn phải -->
-			<div style="text-align: right; padding: 20px 10px 0 0;">
-				<h5><strong>Tổng tiền phải trả:</strong> {{order.get_cart_total | floatformat:0}} VNĐ</h5>
-				<a class="btn btn-success" href="{% url 'checkout' %}" style="margin-top: 10px;">Thanh toán</a>
-			</div>
+				{% for item in items %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:1"><p>{{item.product.price | floatformat:0}} VNĐ</p></div>
+					<div style="flex:1">
+						<p class="quantity">{{item.quantity}}</p>
+						<div class="quantity">
+							<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static 'app/images/arrow-up.png' %}">
+							<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static 'app/images/arrow-down.png' %}">
+						</div>
+					</div>
+					<div style="flex:1"><p>{{item.get_total | floatformat:0}} VNĐ</p></div>
+				</div>
+				{% endfor %}
+
+				<!-- Tổng tiền đưa xuống dưới, căn phải -->
+				<div style="text-align: right; padding: 20px 10px 0 0;">
+					<h5><strong>Tổng tiền phải trả:</strong> {{order.get_cart_total | floatformat:0}} VNĐ</h5>
+					<a class="btn btn-success" href="{% url 'checkout' %}" style="margin-top: 10px;">Thanh toán</a>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

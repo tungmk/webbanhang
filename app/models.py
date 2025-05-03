@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from django.utils import timezone
 
 # Tài khoản khách hàng
 class Customer(models.Model):
@@ -147,4 +149,24 @@ class Payment_success(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.payment_method} - {self.timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
+
+class PaymentForm(forms.Form):
+
+    order_id = forms.CharField(max_length=250)
+    order_type = forms.CharField(max_length=20)
+    amount = forms.IntegerField()
+    order_desc = forms.CharField(max_length=200)
+    bank_code = forms.CharField(max_length=20, required=False)
+    language = forms.CharField(max_length=2)
+
+class PaymentRecord(models.Model):
+    order_id = models.CharField(max_length=255)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    order_desc = models.TextField()
+    transaction_no = models.CharField(max_length=255)
+    response_code = models.CharField(max_length=10)
+    payment_date = models.DateTimeField(default=timezone.now, blank=True, null=True)
+    bank_code = models.CharField(max_length=10)
+    card_type = models.CharField(max_length=20)
+    success = models.BooleanField(default=False)
     

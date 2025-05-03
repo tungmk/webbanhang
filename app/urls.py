@@ -23,4 +23,12 @@ urlpatterns = [
     path('payment/', views.payment_view, name='payment'),
     path('payment-success/', views.payment_success_view, name='payment_success'),
 
+    #VNPAY
+    path('pay/', views.index, name='index'),
+    path('payment_request/',views.payment_request, name='payment_request'),
+    path('payment_ipn/', views.payment_ipn, name='payment_ipn'),
+    path('payment_return/', views.payment_return, name='payment_return'),
+    path('query/', views.query, name='query'),
+    path('refund/', views.refund, name='refund')
+
 ]
