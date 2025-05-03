@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-success text-center">
+        <h4 class="mb-3">🎉 Thanh toán thành công!</h4>
+        <p>Phương thức bạn đã chọn: <strong>{{ payment_method }}</strong></p>
+        <a href="{% url 'home' %}" class="btn btn-success mt-3">Quay lại trang chủ</a>
+    </div>
+</div>
+{% endblock %}

@@ -10,6 +10,11 @@ from django.shortcuts import get_object_or_404
 from .models import Product
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from .models import ShippingAddress
+from django.shortcuts import render, redirect
+from .models import Order, Payment
+from django.utils import timezone
+
 
 # Create your views here.
 def category(request):
@@ -193,3 +198,66 @@ def clear_cart(request):
             return JsonResponse({'success': False, 'message': str(e)})
     
     return JsonResponse({'success': False, 'message': 'Yêu cầu không hợp lệ'})
+
+def processOrder(request):
+    data = json.loads(request.body)
+    
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+    ShippingAddress.objects.create(
+        customer=customer,
+        order=order,
+        name=data['name'],
+        email=data['email'],
+        address=data['address'],
+        city=data['city'],
+        state=data['state'],
+        zipcode=data['zipcode'],
+    )
+
+    order.complete = True
+    order.save()
+
+    return JsonResponse('Đơn hàng đã được xử lý', safe=False)
+
+def payment_view(request):
+    if request.method == 'POST':
+        # Lấy dữ liệu từ form checkout
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zipcode = request.POST.get('zipcode')
+
+        # Bạn có thể lưu dữ liệu này vào session hoặc context để truyền sang payment.html
+        context = {
+            'name': name,
+            'email': email,
+            'address': address,
+            'city': city,
+            'state': state,
+            'zipcode': zipcode,
+        }
+
+        return render(request, 'payment.html',context)
+    
+    # # Nếu ai đó truy cập trực tiếp mà không qua POST
+    return redirect('checkout')  # hoặc trả về lỗi, tuỳ bạn
+
+def payment_success_view(request):
+    if request.method == 'POST':
+        payment_method = request.POST.get('payment_method')
+        
+        # Lưu vào database nếu bạn có model
+        Payment_success.objects.create(
+            user=request.user,
+            payment_method=payment_method
+        )
+
+        return render(request, 'payment_success.html', {
+            'payment_method': payment_method
+        })
+
+    return redirect('payment_success.html')
