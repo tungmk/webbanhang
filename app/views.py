@@ -249,7 +249,6 @@ def processOrder(request):
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
     ShippingAddress.objects.create(
-        customer=customer,
         order=order,
         name=data['name'],
         email=data['email'],
@@ -486,7 +485,6 @@ def payment_return(request):
             if vnp_ResponseCode == "00":
 
                 ShippingAddress.objects.create(
-                    customer=customer,
                     order=order,
                     name=name,
                     email=email,
