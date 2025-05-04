@@ -24,42 +24,6 @@
     </div>
 
     <!-- Form liên hệ -->
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <h5 class="fw-bold">Shop anh Tùng Núi</h5>
-            <p><strong>Trụ sở Hà Nội:</strong> Số 10 Trần Phú Hà Đông, Hà Nội</p>
-            <p><strong>Hotline:</strong> 0326.223.456</p>
-        </div>
-
-        <div class="col-md-6 mt-4">
-            <form method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <input type="text" name="name" class="form-control" placeholder="Họ tên" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" name="phone" class="form-control" placeholder="Số điện thoại" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" name="address" class="form-control" placeholder="Địa chỉ">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <input type="text" name="subject" class="form-control" placeholder="Chủ đề">
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <textarea name="message" class="form-control" rows="4" placeholder="Nội dung"></textarea>
-                    </div>
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-success">Gửi</button>
-                        <button type="reset" class="btn btn-secondary">Nhập lại</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    
 </div>
 {% endblock main-content %}

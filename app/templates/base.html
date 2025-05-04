@@ -76,7 +76,7 @@
                 <form class="d-flex" role="search" method = POST action = "{% url 'search' %}">
                   {% csrf_token %}
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name = "searched">
-                  <button class="btn btn-outline-success" type="submit">Tìm kiếm
+                  <button class="btn btn-outline-success" type="submit">Tìm
                   </button>
                 </form>
               </div>
@@ -97,7 +97,6 @@
               </ul>
               <div class='form-inline my-2 ly-lh-0'>
                 <a href="{% url 'cart' %}"><img id="cart-icon" src="{% static 'images/cart.png' %}"></a>
-                <p id = 'cart-total' >{{cartItems}}</p>
         
               </div>
 
@@ -119,14 +118,60 @@
         {% block register %}{% endblock register %}
         {% block view %}{% endblock view %}
         <!--footer-->
+        <div class="container">
+          <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-4 py-5 my-5 border-top">
+            
+            <!-- Giới thiệu -->
+            <div class="col mb-3">
+              <h5 class="text-dark">Về chúng tôi</h5>
+              <p class="text-muted">
+                Trang web mua sắm tiện lợi, nhanh chóng. Trải nghiệm mua sắm và thanh toán dễ dàng mọi lúc mọi nơi.
+              </p>
+              <p class="text-muted mb-0">&copy; 2025</p>
+            </div>
         
-        <body>
-          <footer class="footer">
-            <p>Copyright 2025</p>
+            <!-- Hỗ trợ -->
+            <div class="col mb-3">
+              <h5 class="text-dark">Hỗ trợ khách hàng</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Trung tâm trợ giúp</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Hướng dẫn mua hàng</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Phương thức thanh toán</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Chính sách đổi trả</a></li>
+              </ul>
+            </div>
+        
+            <!-- Liên hệ -->
+            <div class="col mb-3">
+              <h5 class="text-dark">Liên hệ</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2 text-muted">Hotline: 1900 123 456</li>
+                <li class="nav-item mb-2 text-muted">Email: tung03082004@gmail.com</li>
+                <li class="nav-item mb-2 text-muted">Địa chỉ: Số 10 Trần Phú Hà Đông, Hà Nội</li>
+              </ul>
+            </div>
+        
+            <!-- Mạng xã hội -->
+            <div class="col mb-3">
+              <h5 class="text-dark">Kết nối với chúng tôi</h5>
+              <ul class="list-unstyled d-flex">
+                <li class="text-muted me-3">
+                  Facebook
+                </li>
+                <li class="text-muted me-3">
+                  Instagram
+                </li>
+                <li class="text-muted me-3">
+                  Youtube
+                  
+                </li>
+              </ul>
+            </div>
           </footer>
-        </body>
+        </div>
         
-      
+
         <script src="{%static 'app/js/cart.js' %}" </script></script>
     </body>
+
 </html>
